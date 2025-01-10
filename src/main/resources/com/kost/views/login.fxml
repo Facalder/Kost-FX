@@ -69,7 +69,7 @@
                   </VBox>
                   <VBox prefWidth="100.0" spacing="8.0">
                      <children>
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="primary-button" text="%button.login.submit.login.1" />
+                        <Button onAction="#handleLogin" onTouchPressed="#handleLogin" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="primary-button" text="%button.login.submit.login.1" />
                      </children>
                   </VBox>
                </children>

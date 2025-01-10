@@ -16,9 +16,6 @@ public class LoginPresenter {
     private View login;
 
     @FXML
-    private Label label;
-
-    @FXML
     private ResourceBundle resources;
     
     public void initialize() {
@@ -37,7 +34,12 @@ public class LoginPresenter {
     }
 
     @FXML
-    public void navigateToRegisterView() {
+    private void handleLogin() {
+        AppViewManager.DASHBOARD_VIEW.switchView();
+    }
+
+    @FXML
+    private void navigateToRegisterView() {
         try {
             AppViewManager.REGISTER_VIEW.switchView();
         } catch (Exception e) {

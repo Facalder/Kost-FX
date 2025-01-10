@@ -20,7 +20,12 @@ public class AppViewManager {
     public static final AppViewRegistry REGISTRY = new AppViewRegistry();
 
     public static final AppView LOGIN_VIEW = view("Login", LoginPresenter.class, MaterialDesignIcon.HOME, SHOW_IN_DRAWER, HOME_VIEW, SKIP_VIEW_STACK);
+
     public static final AppView REGISTER_VIEW = view("Register", RegisterPresenter.class, MaterialDesignIcon.DASHBOARD, SHOW_IN_DRAWER);
+
+    public static final AppView DASHBOARD_VIEW = view("Dashboard", DashboardPresenter.class, MaterialDesignIcon.DASHBOARD, SHOW_IN_DRAWER);
+
+    public static final AppView DASHBOARD_ADD_NEW_KOST_VIEW = view("Dashboard Add New Kost", DashboardAddNewKostPresenter.class, MaterialDesignIcon.DASHBOARD, SHOW_IN_DRAWER);
     
     private static AppView view(String title, Class<?> presenterClass, MaterialDesignIcon menuIcon, AppView.Flag... flags ) {
         return REGISTRY.createView(name(presenterClass), title, presenterClass, menuIcon, flags);

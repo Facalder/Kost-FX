@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.mvc.View?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import com.gluonhq.charm.glisten.control.Icon?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<View fx:id="dashboard"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.kost.views.DashboardPresenter"
+      prefHeight="400.0" prefWidth="600.0">
+
+    <top>
+        <VBox maxHeight="-Infinity" prefHeight="-Infinity" prefWidth="441.0" spacing="20.0" styleClass="background-blue">
+            <children>
+                <Label  contentDisplay="TEXT_ONLY" style="-fx-text-fill: white;" text="%label.dashboard.text.title.1" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Label>
+                <VBox  prefHeight="200.0" prefWidth="100.0" spacing="4.0">
+                    <children>
+                        <Label contentDisplay="TEXT_ONLY" style="-fx-text-fill: white;" text="%label.dashboard.text.subtitle.1"
+                               textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="36.0" />
+                            </font>
+                        </Label>
+                        <Label contentDisplay="TEXT_ONLY" style="-fx-text-fill: white;" text="%label.dashboard.text.subtitle.description.1"
+                               textFill="WHITE">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+            </children>
+            <padding>
+                <Insets top="40" left="20" bottom="40" />
+            </padding>
+        </VBox>
+    </top>
+    <left>
+        <VBox prefWidth="200.0" spacing="10.0" style="-fx-background-color: #f3f4f6; -fx-border-color: none;">
+            <children>
+                <HBox alignment="CENTER_LEFT" prefWidth="112.0" spacing="4.0" style="-fx-background-color: #d1d5db; -fx-background-radius: 4;">
+                    <children>
+                        <Icon content="HOME" />
+                        <Label contentDisplay="TEXT_ONLY" text="%label.dashboard.sidebar.text.1">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                    </padding>
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" prefWidth="112.0" spacing="4.0">
+                    <children>
+                        <Icon content="EXIT_TO_APP" style="-fx-text-fill: #dc2626;" />
+                        <Label style="-fx-text-fill: #dc2626" contentDisplay="TEXT_ONLY" text="%label.dashboard.sidebar.text.2">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                    </padding>
+                </HBox>
+            </children>
+            <padding>
+                <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+            </padding>
+        </VBox>
+    </left>
+    <center>
+        <ScrollPane prefHeight="200.0" prefWidth="200.0">
+            <content>
+                <VBox spacing="16.0">
+                    <children>
+                        <TableView prefHeight="-Infinity" tableMenuButtonVisible="true">
+                            <columns>
+                                <TableColumn minWidth="40.0" prefWidth="40.0" text="%label.dashboard.tableColumn.cell.1" />
+                                <TableColumn minWidth="200.0" prefWidth="200.0" text="%label.dashboard.tableColumn.cell.2" />
+                                <TableColumn minWidth="200.0" prefWidth="200.0" text="%label.dashboard.tableColumn.cell.3" />
+                                <TableColumn minWidth="86.0" prefWidth="86.0" text="%label.dashboard.tableColumn.cell.4" />
+                                <TableColumn minWidth="86.0" prefWidth="86.0" text="%label.dashboard.tableColumn.cell.5" />
+                                <TableColumn minWidth="100.0" prefWidth="100.0" text="%label.dashboard.tableColumn.cell.6" />
+                                <TableColumn minWidth="100.0" prefWidth="100.0" text="%label.dashboard.tableColumn.cell.7" />
+                            </columns>
+                            <columnResizePolicy>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                            </columnResizePolicy>
+                        </TableView>
+                    </children>
+                    <padding>
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+</View>

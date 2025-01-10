@@ -7,6 +7,8 @@ public interface IAkunServices {
 
     public void register(Akun akun);
 
+    public void logout();
+
     public String getLoggedInUsername();
 
     public String getLoggedInPassword();

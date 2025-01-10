@@ -109,6 +109,11 @@ public class AkunServices implements IAkunServices {
     }
 
     @Override
+    public void logout() {
+
+    }
+
+    @Override
     public String getLoggedInUsername() {
         return "";
     }

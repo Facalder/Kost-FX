@@ -2,9 +2,21 @@
     -fx-background-color: #2563eb;
 }
 
+.background-gray {
+    -fx-background-color: #f3f4f6;
+}
+
 .primary-button {
     -fx-background-color: #2563eb;
     -fx-font-weight: 700;
+    -fx-background-radius: 8;
+    -fx-font-size: 16;
+}
+
+.danger-button {
+    -fx-background-color: #dc2626;
+    -fx-font-weight: 700;
+    -fx-text-fill: white;
     -fx-background-radius: 8;
     -fx-font-size: 16;
 }
@@ -15,6 +27,10 @@
     -fx-text-fill: black;
     -fx-background-radius: 8;
     -fx-font-size: 16;
+}
+
+.floating-action-button {
+    -fx-background-color: #2563eb;
 }
 
 .text-field, .password-field, .choice-box {
@@ -52,4 +68,32 @@
 .text-field.error, .password-field.error, .choice-box.error {
     -fx-border-color: #dc2626;
     -fx-background-color: #fef2f2;
+}
+
+.table-view {
+    -fx-background-color: #f0f0f0;
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 8;
+    -fx-border-radius: 8;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #d3d3d3;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 30px;
+}
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: #e6e6e6;
+}
+
+.table-view .table-row-cell:even {
+    -fx-background-color: #ffffff;
+}
+
+.table-view .table-cell {
+    -fx-alignment: CENTER-LEFT;
+    -fx-padding: 8px;
 }
