@@ -5,13 +5,125 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 
+<?import javafx.scene.control.ChoiceBox?>
 <View fx:id="register" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kost.views.RegisterPresenter">
-   <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+   <top>
+      <VBox alignment="TOP_CENTER" prefHeight="260.0" prefWidth="441.0" spacing="20.0" styleClass="background-blue">
          <children>
-            <Label text="%label.text" />
+            <Label alignment="CENTER" contentDisplay="TEXT_ONLY" style="-fx-text-fill: white;" text="%label.register.text.title.1" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="4.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="TEXT_ONLY" style="-fx-text-fill: white;" text="%label.register.text.subtitle.1" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="TEXT_ONLY" style="-fx-text-fill: white;" text="%label.register.text.subtitle.description.1" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
          </children>
+         <padding>
+            <Insets bottom="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </top>
+
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="24.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox spacing="16.0">
+               <children>
+                  <VBox prefWidth="100.0"  spacing="8.0">
+                     <children>
+                        <Label text="%label.register.textField.username">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="usernameField" promptText="%label.register.textField.username.promptText" />
+                     </children>
+                  </VBox>
+                  <VBox prefWidth="100.0" spacing="8.0">
+                     <children>
+                        <Label text="%label.register.passwordField.password">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <PasswordField fx:id="passwordField" promptText="%label.register.passwordField.promptText" />
+                     </children>
+                  </VBox>
+                  <VBox prefWidth="100.0" spacing="8.0">
+                     <children>
+                        <Label text="%label.register.choiceBox.role">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="roleChoiceField" maxWidth="1.7976931348623157E308" />
+                     </children>
+                  </VBox>
+                  <VBox prefWidth="100.0" spacing="8.0">
+                     <children>
+                        <Label text="%label.register.choiceBox.securityQuestions">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="questionChoiceField" maxWidth="1.7976931348623157E308" />
+                     </children>
+                  </VBox>
+                  <VBox prefWidth="100.0" spacing="8.0">
+                     <children>
+                        <Label text="%label.register.textField.securityAnswer">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="answerField" promptText="%label.register.textField.securityAnswer.promptText" />
+                     </children>
+                  </VBox>
+                  <VBox prefWidth="100.0" spacing="8.0">
+                     <children>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="primary-button" text="%button.register.submit.register.1" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="16.0" top="16.0" />
+         </padding>
       </VBox>
    </center>
+
+   <bottom>
+      <VBox alignment="BASELINE_CENTER" BorderPane.alignment="BASELINE_CENTER">
+         <children>
+            <Text onMouseClicked="#navigateToLoginView" onTouchPressed="#navigateToLoginView" text="%label.register.text.haveAnAccount" fill="#2563eb">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+   </bottom>
 </View>

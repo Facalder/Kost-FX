@@ -1,3 +1,55 @@
-.root {
+.background-blue {
+    -fx-background-color: #2563eb;
+}
 
+.primary-button {
+    -fx-background-color: #2563eb;
+    -fx-font-weight: 700;
+    -fx-background-radius: 8;
+    -fx-font-size: 16;
+}
+
+.secondary-button {
+    -fx-background-color: #9ca3af;
+    -fx-font-weight: 700;
+    -fx-text-fill: black;
+    -fx-background-radius: 8;
+    -fx-font-size: 16;
+}
+
+.text-field, .password-field, .choice-box {
+    -fx-pref-width: 300px;
+    -fx-padding: 8px;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-width: 2;
+    -fx-border-color: #BDBDBD;
+    -fx-background-color: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+.text-field:focused, .password-field:focused, .choice-box:focused {
+    -fx-border-color: #2563eb;
+    -fx-box-shadow: 0 0 5px #4CAF50;
+}
+
+.text-field .text-prompt, .password-field .text-prompt {
+    -fx-font-style: italic;
+    -fx-text-fill: #9E9E9E;
+}
+
+.choice-box .arrow {
+    -fx-background-color: #2563eb;
+    -fx-padding: 5px;
+    -fx-background-radius: 50%;
+}
+
+.text-field:hover, .password-field:hover, .choice-box:hover {
+    -fx-border-color: #2563eb;
+}
+
+.text-field.error, .password-field.error, .choice-box.error {
+    -fx-border-color: #dc2626;
+    -fx-background-color: #fef2f2;
 }
