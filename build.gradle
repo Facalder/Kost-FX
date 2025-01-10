@@ -1,0 +1,35 @@
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+    id 'com.gluonhq.gluonfx-gradle-plugin' version '1.0.24'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://nexus.gluonhq.com/nexus/content/repositories/releases'
+    }
+}
+
+mainClassName = 'com.kost.MainApplication'
+
+dependencies {
+    implementation 'com.gluonhq:charm-glisten:6.2.3'
+    implementation 'com.gluonhq:glisten-afterburner:2.1.0'
+    implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'org.mindrot:jbcrypt:0.4'
+}
+
+javafx {
+    version = '23'
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+gluonfx {
+    // target = 'ios' // Uncomment to enable iOS
+    // target = 'android' // Uncomment to enable Android
+    attachConfig {
+        version = "4.0.21"
+        services 'display', 'lifecycle', 'statusbar', 'storage'
+    }
+}
