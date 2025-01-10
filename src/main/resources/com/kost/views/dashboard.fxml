@@ -65,7 +65,7 @@
                     </padding>
                 </HBox>
 
-                <HBox alignment="CENTER_LEFT" prefWidth="112.0" spacing="4.0">
+                <HBox onMouseClicked="#handleLogout" onTouchPressed="#handleLogout" alignment="CENTER_LEFT" prefWidth="112.0" spacing="4.0">
                     <children>
                         <Icon content="EXIT_TO_APP" style="-fx-text-fill: #dc2626;" />
                         <Label style="-fx-text-fill: #dc2626" contentDisplay="TEXT_ONLY" text="%label.dashboard.sidebar.text.2">

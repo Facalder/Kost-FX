@@ -5,6 +5,7 @@ import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.FloatingActionButton;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 
 public class DashboardPresenter {
@@ -29,5 +30,14 @@ public class DashboardPresenter {
                 appBar.setVisible(false);
             }
         });
+    }
+
+    @FXML
+    private void handleLogout() {
+        try {
+            AppViewManager.LOGIN_VIEW.switchView();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
