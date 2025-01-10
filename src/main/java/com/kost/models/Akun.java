@@ -15,6 +15,11 @@ public class Akun {
         this.security_answer = security_answer;
     }
 
+    public Akun(String nama_pengguna, String kata_sandi)  {
+        this.nama_pengguna = nama_pengguna;
+        this.kata_sandi = kata_sandi;
+    }
+
     public Akun() {
 
     }
