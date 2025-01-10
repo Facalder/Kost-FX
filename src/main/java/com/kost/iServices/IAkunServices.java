@@ -13,5 +13,9 @@ public interface IAkunServices {
 
     public String getLoggedInPassword();
 
-    public String getLoggedInUserId();
+    public int getLoggedInUserId();
+
+    public boolean getLoggedInStatus();
+
+    public boolean getRegisteredStatus();
 }

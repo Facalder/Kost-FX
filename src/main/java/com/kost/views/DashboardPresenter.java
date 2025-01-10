@@ -5,8 +5,10 @@ import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.FloatingActionButton;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
+import com.kost.utils.OthersUtils;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 
 public class DashboardPresenter {
     @FXML
@@ -35,6 +37,13 @@ public class DashboardPresenter {
     @FXML
     private void handleLogout() {
         try {
+            OthersUtils.showAlert(
+                    Alert.AlertType.CONFIRMATION,
+                    "CONFIRMATION",
+                    "Are you sure want to logout?",
+                    "You can log in again"
+            );
+
             AppViewManager.LOGIN_VIEW.switchView();
         } catch (Exception e) {
             System.out.println(e.getMessage());

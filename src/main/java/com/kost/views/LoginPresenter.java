@@ -6,8 +6,16 @@ import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import java.util.ResourceBundle;
+
+import com.kost.iServices.IAkunServices;
+import com.kost.models.Akun;
+import com.kost.services.AkunServices;
+import com.kost.utils.OthersUtils;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class LoginPresenter {
@@ -16,7 +24,10 @@ public class LoginPresenter {
     private View login;
 
     @FXML
-    private ResourceBundle resources;
+    private TextField usernameField;
+
+    @FXML
+    private PasswordField passwordField;
     
     public void initialize() {
         login.showingProperty().addListener((obs, oldValue, newValue) -> {
@@ -35,7 +46,19 @@ public class LoginPresenter {
 
     @FXML
     private void handleLogin() {
-        AppViewManager.DASHBOARD_VIEW.switchView();
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+
+        try {
+            IAkunServices akunServices = new AkunServices();
+            Akun akun = new Akun(username, password);
+
+            akunServices.login(akun);
+
+            if (akunServices.getLoggedInStatus()) resetInputs();
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
@@ -45,5 +68,10 @@ public class LoginPresenter {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private void resetInputs() {
+        usernameField.clear();
+        passwordField.clear();
     }
 }

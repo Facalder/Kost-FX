@@ -15,10 +15,11 @@ import java.sql.SQLException;
 public class AkunServices implements IAkunServices {
     private String loggedInUsername;
     private String loggedInPassword;
-    private String loggedInUserId;
+    private int loggedInUserId;
+    private boolean loggedIn = false;
+    private boolean registered = false;
 
     private ResultSet result;
-
 
     @Override
     public void login(Akun akun) {
@@ -26,29 +27,61 @@ public class AkunServices implements IAkunServices {
 
         try (var con = DBConnection.connect()) {
             if (con != null) {
-                PreparedStatement stmt = con.prepareStatement(query);
-                stmt.setString(1, akun.getNama_pengguna());
-                stmt.executeQuery();
-                result = stmt.getResultSet();
-
-                if (result.next()) {
-                    boolean passwordPassed = PasswordUtils.checkPassword(akun.getKata_sandi(), result.getString("kata_sandi"));
-
-                    if (!passwordPassed) {
-                        System.out.println("Password Salah");
-                    }else {
-                        loggedInUsername = akun.getNama_pengguna();
-                        loggedInPassword = akun.getKata_sandi();
-                        loggedInUserId = result.getString("id");
-
-                        if (result.getString("role").equals("admin")) {
-                            // AppViewManager.DASHBOARD_VIEW.switchView();
-                        }else {
-                            System.out.println("Role tidak ditemukan!");
-                        }
-                    }
+                if (akun.getNama_pengguna().isEmpty() && akun.getKata_sandi().isEmpty()) {
+                    OthersUtils.showAlert(
+                            Alert.AlertType.ERROR,
+                            "ERROR",
+                            "You must fill username and password",
+                            ""
+                    );
                 }else {
-                    System.out.println("Nama pengguna tidak ditemukan!");
+                    PreparedStatement stmt = con.prepareStatement(query);
+                    stmt.setString(1, akun.getNama_pengguna());
+                    stmt.executeQuery();
+                    result = stmt.getResultSet();
+
+                    if (result.next()) {
+                        boolean passwordPassed = PasswordUtils.checkPassword(akun.getKata_sandi(), result.getString("kata_sandi"));
+
+                        if (!passwordPassed) {
+                            OthersUtils.showAlert(
+                                    Alert.AlertType.ERROR,
+                                    "ERROR",
+                                    "Password Incorrect",
+                                    ""
+                            );
+                        }else {
+                            loggedInUsername = akun.getNama_pengguna();
+                            loggedInPassword = akun.getKata_sandi();
+                            loggedInUserId = result.getInt("id");
+
+                            if (result.getString("role").equals("admin")) {
+                                setLoggedIn(true);
+                                OthersUtils.showAlert(
+                                        Alert.AlertType.CONFIRMATION,
+                                        "SUCCESS",
+                                        "Login Successful",
+                                        ""
+                                );
+
+                                AppViewManager.DASHBOARD_VIEW.switchView();
+                            }else {
+                                OthersUtils.showAlert(
+                                        Alert.AlertType.ERROR,
+                                        "ERROR",
+                                        "Role doesn't exist",
+                                        ""
+                                );
+                            }
+                        }
+                    }else {
+                        OthersUtils.showAlert(
+                                Alert.AlertType.ERROR,
+                                "ERROR",
+                                "User doesn't exist",
+                                ""
+                        );
+                    }
                 }
             }
         }catch (SQLException e) {
@@ -64,41 +97,57 @@ public class AkunServices implements IAkunServices {
 
         try (var con = DBConnection.connect()) {
             if (con != null) {
-                // Cek apakah username sudah ada
-                PreparedStatement stmtCheck = con.prepareStatement(query_check);
-                stmtCheck.setString(1, akun.getNama_pengguna());
-                ResultSet result = stmtCheck.executeQuery();
-
-                if (result.next()) {
-                    // Username sudah terdaftar
-                    OthersUtils.showAlert(Alert.AlertType.ERROR, "ERROR", "Nama Pengguna Telah Terdaftar!", "Tolong gunakan username lainnya!");
+                if (akun.getNama_pengguna().isEmpty() || akun.getKata_sandi().isEmpty() || akun.getRole().isEmpty() || akun.getSecurity_question().isEmpty() || akun.getSecurity_answer().isEmpty()) {
+                    OthersUtils.showAlert(
+                            Alert.AlertType.ERROR,
+                            "ERROR",
+                            "You must fill this all form field",
+                            ""
+                    );
                 } else {
-                    // Hash password sebelum disimpan
-                    String hashedPassword = PasswordUtils.hashPassword(akun.getKata_sandi());
+                    PreparedStatement stmtCheck = con.prepareStatement(query_check);
+                    stmtCheck.setString(1, akun.getNama_pengguna());
+                    ResultSet result = stmtCheck.executeQuery();
 
-                    // Masukkan data ke database
-                    PreparedStatement stmtInsert = con.prepareStatement(query);
-                    stmtInsert.setString(1, akun.getNama_pengguna());
-                    stmtInsert.setString(2, hashedPassword);
-                    stmtInsert.setString(3, akun.getRole());
-                    stmtInsert.setString(4, akun.getSecurity_question());
-                    stmtInsert.setString(5, akun.getSecurity_answer());
-
-                    int rowsAffected = stmtInsert.executeUpdate(); // Gunakan executeUpdate untuk perintah INSERT
-
-                    if (rowsAffected > 0) {
-                        // Registrasi berhasil
-                        loggedInUsername = akun.getNama_pengguna();
-                        loggedInPassword = akun.getNama_pengguna();
-
-                        OthersUtils.showAlert(Alert.AlertType.INFORMATION, "SUCCESS", "Registrasi Berhasil", "Akun Anda berhasil dibuat!");
-
-                        // Alihkan ke halaman dashboard jika role adalah admin
-                        if ("admin".equals(result.getString("role"))) {
-                            // AppViewManager.DASHBOARD_VIEW.switchView();
-                        }
+                    if (result.next()) {
+                        OthersUtils.showAlert(Alert.AlertType.ERROR, "ERROR", "Nama Pengguna Telah Terdaftar!", "Tolong gunakan username lainnya!");
                     } else {
-                        OthersUtils.showAlert(Alert.AlertType.ERROR, "ERROR", "Registrasi Gagal", "Terjadi kesalahan saat membuat akun.");
+                        String hashedPassword = PasswordUtils.hashPassword(akun.getKata_sandi());
+
+                        PreparedStatement stmtInsert = con.prepareStatement(query);
+                        stmtInsert.setString(1, akun.getNama_pengguna());
+                        stmtInsert.setString(2, hashedPassword);
+                        stmtInsert.setString(3, akun.getRole());
+                        stmtInsert.setString(4, akun.getSecurity_question());
+                        stmtInsert.setString(5, akun.getSecurity_answer());
+
+                        int rowsAffected = stmtInsert.executeUpdate();
+
+                        if (rowsAffected > 0) {
+                            loggedInUsername = akun.getNama_pengguna();
+                            loggedInPassword = akun.getNama_pengguna();
+
+                            OthersUtils.showAlert(Alert.AlertType.INFORMATION, "SUCCESS", "Registrasi Berhasil", "Akun Anda berhasil dibuat!");
+
+                            PreparedStatement stmtRoleCheck = con.prepareStatement(query_check);
+                            stmtRoleCheck.setString(1, akun.getNama_pengguna());
+                            ResultSet roleResult = stmtRoleCheck.executeQuery();
+
+                            if (roleResult.next() && "admin".equals(roleResult.getString("role"))) {
+                                setRegistered(true);
+
+                                OthersUtils.showAlert(
+                                        Alert.AlertType.CONFIRMATION,
+                                        "SUCCESS",
+                                        "Register Successful",
+                                        ""
+                                );
+
+                                AppViewManager.DASHBOARD_VIEW.switchView();
+                            }
+                        } else {
+                            OthersUtils.showAlert(Alert.AlertType.ERROR, "ERROR", "Registrasi Gagal", "Terjadi kesalahan saat membuat akun.");
+                        }
                     }
                 }
             }
@@ -108,6 +157,7 @@ public class AkunServices implements IAkunServices {
         }
     }
 
+
     @Override
     public void logout() {
 
@@ -115,16 +165,34 @@ public class AkunServices implements IAkunServices {
 
     @Override
     public String getLoggedInUsername() {
-        return "";
+        return loggedInUsername;
     }
 
     @Override
     public String getLoggedInPassword() {
-        return "";
+        return loggedInPassword;
     }
 
     @Override
-    public String getLoggedInUserId() {
-        return "";
+    public int getLoggedInUserId() {
+        return loggedInUserId;
+    }
+
+    @Override
+    public boolean getLoggedInStatus() {
+        return loggedIn;
+    }
+
+    @Override
+    public boolean getRegisteredStatus() {
+        return registered;
+    }
+
+    private void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+
+    private void setRegistered(boolean registered) {
+        this.registered = registered;
     }
 }
