@@ -1,5 +1,6 @@
 package com.kost;
 
+import com.kost.db.DBConnection;
 import com.kost.views.AppViewManager;
 import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.visual.Swatch;
@@ -10,6 +11,8 @@ import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.sql.SQLException;
 
 public class MainApplication extends Application {
 
@@ -46,6 +49,12 @@ public class MainApplication extends Application {
     }
 
     public static void main(String args[]) {
+        try (var connection = DBConnection.connect()){
+            System.out.println("Connected to database");
+        }catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+        }
+
         launch(args);
     }
 }
