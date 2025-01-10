@@ -3,6 +3,8 @@ package com.kost.services;
 import com.kost.db.DBConnection;
 import com.kost.iServices.IAkunServices;
 import com.kost.models.Akun;
+import com.kost.utils.OthersUtils;
+import com.kost.utils.PasswordUtils;
 import com.kost.views.AppViewManager;
 import javafx.scene.control.Alert;
 
@@ -30,7 +32,7 @@ public class AkunServices implements IAkunServices {
                 result = stmt.getResultSet();
 
                 if (result.next()) {
-                    // boolean passwordPassed = PasswordUtils.checkPassword(akun.getKata_sandi(), result.getString("kata_sandi"));
+                    boolean passwordPassed = PasswordUtils.checkPassword(akun.getKata_sandi(), result.getString("kata_sandi"));
 
                     if (!passwordPassed) {
                         System.out.println("Password Salah");
