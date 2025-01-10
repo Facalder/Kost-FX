@@ -7,6 +7,7 @@ import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.kost.iServices.IAkunServices;
 import com.kost.models.Akun;
 import com.kost.services.AkunServices;
+import com.kost.session.AkunSessionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -79,8 +80,10 @@ public class RegisterPresenter {
             IAkunServices akunServices = new AkunServices();
             Akun akun = new Akun(username, password, role, question, answer);
 
+            AkunSessionManager session = AkunSessionManager.getInstance();
+            session.setCurrentAkun(akun);
+
             akunServices.register(akun);
-            if (akunServices.getRegisteredStatus()) resetInputs();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

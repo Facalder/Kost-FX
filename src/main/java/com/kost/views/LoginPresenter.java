@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import com.kost.iServices.IAkunServices;
 import com.kost.models.Akun;
 import com.kost.services.AkunServices;
+import com.kost.session.AkunSessionManager;
 import com.kost.utils.OthersUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -54,8 +55,7 @@ public class LoginPresenter {
             Akun akun = new Akun(username, password);
 
             akunServices.login(akun);
-
-            if (akunServices.getLoggedInStatus()) resetInputs();
+            resetInputs();
         }catch (Exception e) {
             System.out.println(e.getMessage());
         }

@@ -50,7 +50,7 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField styleClass="text-field, text-prompt" fx:id="facilitiessField" promptText="%label.dashboardAddNewKost.textField.facilities.promptText" />
+                                <TextField styleClass="text-field, text-prompt" fx:id="facilitiesField" promptText="%label.dashboardAddNewKost.textField.facilities.promptText" />
                             </children>
                         </VBox>
                         <VBox prefWidth="100.0" spacing="8.0">
@@ -108,7 +108,7 @@
                         </VBox>
                     </children>
                 </VBox>
-                <Button mnemonicParsing="false" styleClass="primary-button" text="%button.dashboardAddNewKost.submit.dashboardAddNewKost.1">
+                <Button onAction="#handleAddNewKost" onTouchPressed="#handleAddNewKost" mnemonicParsing="false" styleClass="primary-button" text="%button.dashboardAddNewKost.submit.dashboardAddNewKost.1">
                     <graphic>
                         <Icon content="ADD" />
                     </graphic>

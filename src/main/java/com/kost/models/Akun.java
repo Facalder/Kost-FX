@@ -6,6 +6,7 @@ public class Akun {
     private String role;
     private String security_question;
     private String security_answer;
+    private boolean session;
 
     public Akun(String nama_pengguna, String kata_sandi, String role, String security_question, String security_answer) {
         this.nama_pengguna = nama_pengguna;
@@ -15,9 +16,24 @@ public class Akun {
         this.security_answer = security_answer;
     }
 
+    public Akun(String nama_pengguna, String kata_sandi, String role, String security_question, String security_answer, boolean session) {
+        this.nama_pengguna = nama_pengguna;
+        this.kata_sandi = kata_sandi;
+        this.role = role;
+        this.security_question = security_question;
+        this.security_answer = security_answer;
+        this.session = session;
+    }
+
     public Akun(String nama_pengguna, String kata_sandi)  {
         this.nama_pengguna = nama_pengguna;
         this.kata_sandi = kata_sandi;
+    }
+
+    public Akun(String nama_pengguna, String kata_sandi, boolean session)  {
+        this.nama_pengguna = nama_pengguna;
+        this.kata_sandi = kata_sandi;
+        this.session = session;
     }
 
     public Akun() {
@@ -62,6 +78,14 @@ public class Akun {
 
     public void setSecurity_answer(String security_answer) {
         this.security_answer = security_answer;
+    }
+
+    public boolean getSession() {
+        return session;
+    }
+
+    public void setSession(boolean session) {
+        this.session = session;
     }
 
     @Override

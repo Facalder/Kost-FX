@@ -17,6 +17,13 @@ public class Kost {
         this.foto = foto;
     }
 
+    public Kost(String alamat, String fasilitas, double harga, int total_kamar) {
+        this.alamat = alamat;
+        this.fasilitas = fasilitas;
+        this.harga = harga;
+        this.total_kamar = total_kamar;
+    }
+
     public String getAlamat() {
         return alamat;
     }
@@ -33,7 +40,7 @@ public class Kost {
         this.fasilitas = fasilitas;
     }
 
-    public double getHarga() {
+    public Double getHarga() {
         return harga;
     }
 
@@ -41,7 +48,7 @@ public class Kost {
         this.harga = harga;
     }
 
-    public int getTotal_kamar() {
+    public Integer getTotal_kamar() {
         return total_kamar;
     }
 
@@ -49,7 +56,7 @@ public class Kost {
         this.total_kamar = total_kamar;
     }
 
-    public int getKamar_tersedia() {
+    public Integer getKamar_tersedia() {
         return kamar_tersedia;
     }
 

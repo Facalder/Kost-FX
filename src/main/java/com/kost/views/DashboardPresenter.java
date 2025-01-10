@@ -1,18 +1,29 @@
 package com.kost.views;
 
+import com.airhacks.afterburner.injection.Injector;
 import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.FloatingActionButton;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
+import com.kost.models.Akun;
+import com.kost.session.AkunSessionManager;
 import com.kost.utils.OthersUtils;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+
+import java.util.ResourceBundle;
 
 public class DashboardPresenter {
     @FXML
     private View dashboard;
+
+    @FXML
+    private Label subtitle1;
+
+    @FXML
+    private ResourceBundle resources;
 
     public void initialize() {
         FloatingActionButton fab = new FloatingActionButton(MaterialDesignIcon.ADD.text,
@@ -42,6 +53,16 @@ public class DashboardPresenter {
                     "CONFIRMATION",
                     "Are you sure want to logout?",
                     "You can log in again"
+            );
+
+            AkunSessionManager.getInstance().removeCurrentAkun();
+            Injector.forgetAll();
+
+            OthersUtils.showAlert(
+                    Alert.AlertType.INFORMATION,
+                    "INFO",
+                    "Logout Successful and Cache Cleared",
+                    ""
             );
 
             AppViewManager.LOGIN_VIEW.switchView();

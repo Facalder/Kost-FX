@@ -3,6 +3,7 @@ package com.kost.services;
 import com.kost.db.DBConnection;
 import com.kost.iServices.IAkunServices;
 import com.kost.models.Akun;
+import com.kost.session.AkunSessionManager;
 import com.kost.utils.OthersUtils;
 import com.kost.utils.PasswordUtils;
 import com.kost.views.AppViewManager;
@@ -16,8 +17,9 @@ public class AkunServices implements IAkunServices {
     private String loggedInUsername;
     private String loggedInPassword;
     private int loggedInUserId;
-    private boolean loggedIn = false;
-    private boolean registered = false;
+
+    private boolean loggedIn;
+    private boolean registered;
 
     private ResultSet result;
 
@@ -51,12 +53,11 @@ public class AkunServices implements IAkunServices {
                                     ""
                             );
                         }else {
-                            loggedInUsername = akun.getNama_pengguna();
-                            loggedInPassword = akun.getKata_sandi();
-                            loggedInUserId = result.getInt("id");
-
                             if (result.getString("role").equals("admin")) {
-                                setLoggedIn(true);
+                                AkunSessionManager session = AkunSessionManager.getInstance();
+                                session.setCurrentAkun(akun);
+                                System.out.println(session.getCurrentAkun());
+
                                 OthersUtils.showAlert(
                                         Alert.AlertType.CONFIRMATION,
                                         "SUCCESS",
@@ -124,9 +125,6 @@ public class AkunServices implements IAkunServices {
                         int rowsAffected = stmtInsert.executeUpdate();
 
                         if (rowsAffected > 0) {
-                            loggedInUsername = akun.getNama_pengguna();
-                            loggedInPassword = akun.getNama_pengguna();
-
                             OthersUtils.showAlert(Alert.AlertType.INFORMATION, "SUCCESS", "Registrasi Berhasil", "Akun Anda berhasil dibuat!");
 
                             PreparedStatement stmtRoleCheck = con.prepareStatement(query_check);
