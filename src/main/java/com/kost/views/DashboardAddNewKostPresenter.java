@@ -55,6 +55,10 @@ public class DashboardAddNewKostPresenter {
             Kost kost = new Kost(address, facilities, price, totalRoom);
 
             kostServices.addNewKost(kost);
+            kostServices.showAllKosts().add(kost);
+            resetInputs();
+
+            AppViewManager.DASHBOARD_VIEW.switchView();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

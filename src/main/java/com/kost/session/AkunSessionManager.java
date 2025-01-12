@@ -16,6 +16,14 @@ public class AkunSessionManager {
         return instance;
     }
 
+    public void setCurrentAkunRole(String role) {
+        this.currentAkun.setRole(role);
+    }
+
+    public String getCurrentAkunRole() {
+        return currentAkun.getRole();
+    }
+
     public void setCurrentAkun(Akun akun) {
         currentAkun = akun;
     }

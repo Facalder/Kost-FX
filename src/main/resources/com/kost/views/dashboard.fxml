@@ -12,6 +12,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.Button?>
 <View fx:id="dashboard"
       xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
@@ -89,16 +90,30 @@
             <content>
                 <VBox spacing="16.0">
                     <children>
-                        <TableView prefHeight="-Infinity" tableMenuButtonVisible="true">
+                        <Button onAction="#refreshData" onTouchPressed="#refreshData" fx:id="refreshData" text="Refresh"/>
+                        <TableView fx:id="tableKost" prefHeight="400" tableMenuButtonVisible="true">
                             <columns>
-                                <TableColumn minWidth="40.0" prefWidth="40.0" text="%label.dashboard.tableColumn.cell.1" />
-                                <TableColumn minWidth="200.0" prefWidth="200.0" text="%label.dashboard.tableColumn.cell.2" />
-                                <TableColumn minWidth="200.0" prefWidth="200.0" text="%label.dashboard.tableColumn.cell.3" />
-                                <TableColumn minWidth="86.0" prefWidth="86.0" text="%label.dashboard.tableColumn.cell.4" />
-                                <TableColumn minWidth="86.0" prefWidth="86.0" text="%label.dashboard.tableColumn.cell.5" />
-                                <TableColumn minWidth="100.0" prefWidth="100.0" text="%label.dashboard.tableColumn.cell.6" />
-                                <TableColumn minWidth="100.0" prefWidth="100.0" text="%label.dashboard.tableColumn.cell.7" />
+                                <TableColumn fx:id="noColumn" text="%label.dashboard.tableColumn.cell.1" />
+
+                                <TableColumn fx:id="idColumn" text="%label.dashboard.tableColumn.cell.2" />
+
+                                <TableColumn fx:id="alamatColumn" text="%label.dashboard.tableColumn.cell.3" />
+
+                                <TableColumn fx:id="fasilitasColumn" text="%label.dashboard.tableColumn.cell.4" />
+
+                                <TableColumn fx:id="hargaColumn" text="%label.dashboard.tableColumn.cell.5" />
+
+                                <TableColumn fx:id="promoPercentageColumn" text="%label.dashboard.tableColumn.cell.6" />
+
+                                <TableColumn fx:id="promoExpiryColumn" text="%label.dashboard.tableColumn.cell.7" />
+
+                                <TableColumn fx:id="totalKamarColumn" text="%label.dashboard.tableColumn.cell.8" />
+
+                                <TableColumn fx:id="kamarTersediaColumn" text="%label.dashboard.tableColumn.cell.9" />
+
+                                <TableColumn fx:id="actionColumn" text="%label.dashboard.tableColumn.cell.10" />
                             </columns>
+
                             <columnResizePolicy>
                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                             </columnResizePolicy>

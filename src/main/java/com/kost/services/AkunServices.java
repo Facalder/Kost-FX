@@ -54,6 +54,9 @@ public class AkunServices implements IAkunServices {
                             );
                         }else {
                             if (result.getString("role").equals("admin")) {
+                                Akun admin = new Akun();
+                                akun.setRole("admin");
+
                                 AkunSessionManager session = AkunSessionManager.getInstance();
                                 session.setCurrentAkun(akun);
                                 System.out.println(session.getCurrentAkun());

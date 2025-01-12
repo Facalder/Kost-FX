@@ -1,9 +1,16 @@
 package com.kost.models;
 
+import java.util.Date;
+
 public class Kost {
+    private int id;
+    private String nama_pengguna;
     private String alamat;
     private String fasilitas;
     private double harga;
+    private double promo_percentage;
+    private Date promo_expiry;
+    private int kost_id;
     private int total_kamar;
     private int kamar_tersedia;
     private String foto;
@@ -22,6 +29,29 @@ public class Kost {
         this.fasilitas = fasilitas;
         this.harga = harga;
         this.total_kamar = total_kamar;
+    }
+
+    public Kost(int id, String alamat, String fasilitas, double harga, double promoPercentage, Date promoExpiry) {
+        this.id = id;
+        this.alamat = alamat;
+        this.fasilitas = fasilitas;
+        this.harga = harga;
+        this.promo_percentage = promoPercentage;
+        this.promo_expiry = promoExpiry;
+    }
+
+    public Kost(int id, String nama_pengguna, String alamat, String fasilitas, double harga, double promo_percentage, Date promo_expiry, int kost_id, int total_kamar, int kamar_tersedia, String foto) {
+        this.id = id;
+        this.nama_pengguna = nama_pengguna;
+        this.alamat = alamat;
+        this.fasilitas = fasilitas;
+        this.harga = harga;
+        this.promo_percentage = promo_percentage;
+        this.promo_expiry = promo_expiry;
+        this.kost_id = kost_id;
+        this.total_kamar = total_kamar;
+        this.kamar_tersedia = kamar_tersedia;
+        this.foto = foto;
     }
 
     public String getAlamat() {
@@ -48,6 +78,14 @@ public class Kost {
         this.harga = harga;
     }
 
+    public int getKost_id() {
+        return kost_id;
+    }
+
+    public void setKost_id(int kost_id) {
+        this.kost_id = kost_id;
+    }
+
     public Integer getTotal_kamar() {
         return total_kamar;
     }
@@ -70,6 +108,30 @@ public class Kost {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getPromo_percentage() {
+        return promo_percentage;
+    }
+
+    public void setPromo_percentage(double promo_percentage) {
+        this.promo_percentage = promo_percentage;
+    }
+
+    public Date getPromo_expiry() {
+        return promo_expiry;
+    }
+
+    public void setPromo_expiry(Date promo_expiry) {
+        this.promo_expiry = promo_expiry;
     }
 
     @Override

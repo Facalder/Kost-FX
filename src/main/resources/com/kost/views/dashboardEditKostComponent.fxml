@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
 <?import com.gluonhq.charm.glisten.mvc.View?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.geometry.Insets?>
-<?import com.gluonhq.charm.glisten.control.Icon?>
 
-<View fx:id="dashboardAddNewKost" xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.kost.views.DashboardAddNewKostPresenter"
+<?import com.gluonhq.charm.glisten.control.Icon?>
+<View fx:id="editKostModal"
+      xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.kost.views.DashboardEditKostComponent"
       prefHeight="400.0" prefWidth="600.0">
+
     <top>
         <VBox maxHeight="-Infinity" prefHeight="-Infinity" prefWidth="441.0" spacing="20.0" styleClass="background-blue">
             <children>
-                <Label  contentDisplay="TEXT_ONLY" style="-fx-text-fill: white;" text="%label.dashboardAddNewKost.text.title.1" textFill="WHITE">
+                <Label fx:id="titleLabel" contentDisplay="TEXT_ONLY" style="-fx-text-fill: white;" text="Edit Kost Data" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="20.0" />
                     </font>
@@ -29,6 +28,7 @@
             </padding>
         </VBox>
     </top>
+
     <center>
         <VBox spacing="24.0">
             <children>
@@ -36,51 +36,46 @@
                     <children>
                         <VBox prefWidth="100.0" spacing="8.0">
                             <children>
-                                <Label text="%label.dashboardAddNewKost.textField.address">
+                                <Label text="Edit Address">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField styleClass="text-field, text-prompt" fx:id="addressField" promptText="%label.dashboardAddNewKost.textField.address.promptText" />
+                                <TextField styleClass="text-field, text-prompt" fx:id="addressField"/>
                             </children>
                         </VBox>
                         <VBox prefWidth="100.0" spacing="8.0">
                             <children>
-                                <Label text="%label.dashboardAddNewKost.textField.facilities">
+                                <Label text="Edit Facilities">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField styleClass="text-field, text-prompt" fx:id="facilitiesField" promptText="%label.dashboardAddNewKost.textField.facilities.promptText" />
+                                <TextField styleClass="text-field, text-prompt" fx:id="facilitiesField"/>
                             </children>
                         </VBox>
                         <VBox prefWidth="100.0" spacing="8.0">
                             <children>
-                                <Label text="%label.dashboardAddNewKost.textField.price">
+                                <Label text="Edit Price">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField styleClass="text-field, text-prompt" fx:id="priceField" promptText="%label.dashboardAddNewKost.textField.price.promptText" />
+                                <TextField styleClass="text-field, text-prompt" fx:id="priceField"/>
                             </children>
                         </VBox>
                         <VBox prefWidth="100.0" spacing="8.0">
                             <children>
-                                <Label text="%label.dashboardAddNewKost.textField.totalRoom">
+                                <Label text="Edit Total Room">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField styleClass="text-field, text-prompt" fx:id="totalRoomField" promptText="%label.dashboardAddNewKost.textField.totalRoom.promptText" />
+                                <TextField styleClass="text-field, text-prompt" fx:id="totalRoomField" />
                             </children>
                         </VBox>
                     </children>
                 </VBox>
-                <Button onAction="#handleAddNewKost" onTouchPressed="#handleAddNewKost" mnemonicParsing="false" styleClass="primary-button" text="%button.dashboardAddNewKost.submit.dashboardAddNewKost.1">
-                    <graphic>
-                        <Icon content="ADD" />
-                    </graphic>
-                </Button>
             </children>
 
             <padding>
@@ -88,4 +83,18 @@
             </padding>
         </VBox>
     </center>
+
+    <bottom>
+        <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <buttons>
+                <Button onAction="#handleCloseAction" onTouchPressed="#handleCloseAction" mnemonicParsing="false" styleClass="secondary-button" text="Cancel" />
+
+                <Button onAction="#handleEditKostAction" onTouchPressed="#handleEditKostAction" mnemonicParsing="false" textFill="white" styleClass="primary-button" text="Update Kost" />
+            </buttons>
+
+            <padding>
+                <Insets bottom="16" right="16"/>
+            </padding>
+        </ButtonBar>
+    </bottom>
 </View>
