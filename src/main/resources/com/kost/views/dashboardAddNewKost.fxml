@@ -11,6 +11,7 @@
 <?import javafx.geometry.Insets?>
 <?import com.gluonhq.charm.glisten.control.Icon?>
 
+<?import javafx.scene.image.ImageView?>
 <View fx:id="dashboardAddNewKost" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.kost.views.DashboardAddNewKostPresenter"
@@ -76,6 +77,41 @@
                         </VBox>
                     </children>
                 </VBox>
+
+                <VBox spacing="14.0">
+                    <children>
+                        <Label styleClass="text-bold-danger" text="Max image file is 5mb!"/>
+
+                        <HBox prefWidth="200.0" spacing="16.0">
+                            <children>
+                                <Button onAction="#onChoiceImage" onTouchPressed="#onChoiceImage" mnemonicParsing="false" styleClass="secondary-button" text="Upload Gambar Kost">
+                                    <graphic>
+                                        <Icon content="FILE_UPLOAD" />
+                                    </graphic>
+                                </Button>
+
+                                <Button onAction="#onClearImage" onTouchPressed="#onClearImage" mnemonicParsing="false" styleClass="danger-button" text="Hapus Gambar Kost">
+                                    <graphic>
+                                        <Icon content="DELETE" />
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </HBox>
+                        <HBox spacing="8.0">
+                            <children>
+                                <Label text="Nama file:" />
+                                <Label fx:id="imagePathLabel" text="Nama File: ">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+
+                <ImageView fx:id="previewImageView" fitWidth="200" fitHeight="150" preserveRatio="true" />
+
                 <Button onAction="#handleAddNewKost" onTouchPressed="#handleAddNewKost" mnemonicParsing="false" styleClass="primary-button" text="%button.dashboardAddNewKost.submit.dashboardAddNewKost.1">
                     <graphic>
                         <Icon content="ADD" />

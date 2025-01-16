@@ -86,12 +86,12 @@
         </VBox>
     </left>
     <center>
-        <ScrollPane prefHeight="200.0" prefWidth="200.0">
+        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
             <content>
                 <VBox spacing="16.0">
                     <children>
                         <Button onAction="#refreshData" onTouchPressed="#refreshData" fx:id="refreshData" text="Refresh"/>
-                        <TableView fx:id="tableKost" prefHeight="400" tableMenuButtonVisible="true">
+                        <TableView fx:id="tableKost" prefWidth="800" prefHeight="400" tableMenuButtonVisible="true">
                             <columns>
                                 <TableColumn fx:id="noColumn" text="%label.dashboard.tableColumn.cell.1" />
 
@@ -112,6 +112,8 @@
                                 <TableColumn fx:id="kamarTersediaColumn" text="%label.dashboard.tableColumn.cell.9" />
 
                                 <TableColumn fx:id="actionColumn" text="%label.dashboard.tableColumn.cell.10" />
+
+                                <TableColumn fx:id="fotoColumn" text="%label.dashboard.tableColumn.cell.11" />
                             </columns>
 
                             <columnResizePolicy>

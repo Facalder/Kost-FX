@@ -6,6 +6,11 @@
     -fx-background-color: #f3f4f6;
 }
 
+.text-bold-danger {
+    -fx-font-weight: bold;
+    -fx-text-fill: #dc2626;
+}
+
 .primary-button {
     -fx-background-color: #2563eb;
     -fx-font-weight: 700;

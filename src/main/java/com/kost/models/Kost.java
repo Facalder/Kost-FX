@@ -1,5 +1,12 @@
 package com.kost.models;
 
+import javafx.scene.image.Image;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.util.Date;
 
 public class Kost {
@@ -13,34 +20,9 @@ public class Kost {
     private int kost_id;
     private int total_kamar;
     private int kamar_tersedia;
-    private String foto;
+    private Blob foto;
 
-    public Kost(String alamat, String fasilitas, double harga, int total_kamar, int kamar_tersedia, String foto) {
-        this.alamat = alamat;
-        this.fasilitas = fasilitas;
-        this.harga = harga;
-        this.total_kamar = total_kamar;
-        this.kamar_tersedia = kamar_tersedia;
-        this.foto = foto;
-    }
-
-    public Kost(String alamat, String fasilitas, double harga, int total_kamar) {
-        this.alamat = alamat;
-        this.fasilitas = fasilitas;
-        this.harga = harga;
-        this.total_kamar = total_kamar;
-    }
-
-    public Kost(int id, String alamat, String fasilitas, double harga, double promoPercentage, Date promoExpiry) {
-        this.id = id;
-        this.alamat = alamat;
-        this.fasilitas = fasilitas;
-        this.harga = harga;
-        this.promo_percentage = promoPercentage;
-        this.promo_expiry = promoExpiry;
-    }
-
-    public Kost(int id, String nama_pengguna, String alamat, String fasilitas, double harga, double promo_percentage, Date promo_expiry, int kost_id, int total_kamar, int kamar_tersedia, String foto) {
+    public Kost(int id, String nama_pengguna, String alamat, String fasilitas, double harga, double promo_percentage, Date promo_expiry, int kost_id, int total_kamar, int kamar_tersedia, Blob foto) {
         this.id = id;
         this.nama_pengguna = nama_pengguna;
         this.alamat = alamat;
@@ -52,6 +34,21 @@ public class Kost {
         this.total_kamar = total_kamar;
         this.kamar_tersedia = kamar_tersedia;
         this.foto = foto;
+    }
+
+    public Kost(String alamat, String fasilitas, double harga, int total_kamar, Blob foto) {
+        this.alamat = alamat;
+        this.fasilitas = fasilitas;
+        this.harga = harga;
+        this.total_kamar = total_kamar;
+        this.foto = foto;
+    }
+
+    public Kost(String alamat, String fasilitas, double harga, int total_kamar) {
+        this.alamat = alamat;
+        this.fasilitas = fasilitas;
+        this.harga = harga;
+        this.total_kamar = total_kamar;
     }
 
     public String getAlamat() {
@@ -102,14 +99,6 @@ public class Kost {
         this.kamar_tersedia = kamar_tersedia;
     }
 
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
     public int getId() {
         return id;
     }
@@ -132,6 +121,27 @@ public class Kost {
 
     public void setPromo_expiry(Date promo_expiry) {
         this.promo_expiry = promo_expiry;
+    }
+
+    public Blob getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Blob foto) {
+        this.foto = foto;
+    }
+
+    public Image getFotoToImage() {
+        try {
+            if (foto != null) {
+                InputStream inputStream = foto.getBinaryStream();
+                return new Image(inputStream);
+            }
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return null;
     }
 
     @Override

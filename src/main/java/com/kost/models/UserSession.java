@@ -5,11 +5,6 @@ public final class UserSession {
     private String password;
     private String userId;
 
-    public UserSession(String username, String password, String userId) {
-        this.username = username;
-        this.password = password;
-        this.userId = userId;
-    }
 
     public String getUsername() {
         return username;

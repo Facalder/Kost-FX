@@ -12,6 +12,7 @@ import com.kost.services.KostServices;
 import com.kost.session.AkunSessionManager;
 import com.kost.utils.OthersUtils;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -29,6 +31,9 @@ import java.io.IOException;
 import java.util.Date;
 
 public class DashboardPresenter {
+    @FXML
+    private Label subtitle1;
+
     @FXML
     private View dashboard;
 
@@ -64,6 +69,9 @@ public class DashboardPresenter {
 
     @FXML
     private TableColumn<Kost, String> actionColumn;
+
+    @FXML
+    private TableColumn<Kost, ImageView> fotoColumn;
 
     @FXML
     private Button refreshData;
@@ -112,6 +120,20 @@ public class DashboardPresenter {
         promoExpiryColumn.setCellValueFactory(new PropertyValueFactory<>("promo_expiry"));
         totalKamarColumn.setCellValueFactory(new PropertyValueFactory<>("total_kamar"));
         kamarTersediaColumn.setCellValueFactory(new PropertyValueFactory<>("kamar_tersedia"));
+        fotoColumn.setCellValueFactory(cellData -> {
+            Kost kost = cellData.getValue();
+            Image image = kost.getFotoToImage();
+
+            if (image != null) {
+                ImageView imageView = new ImageView(image);
+                imageView.setFitWidth(100);
+                imageView.setFitHeight(600);
+                imageView.setPreserveRatio(true);
+                return new SimpleObjectProperty<>(imageView);
+            }
+
+            return null;
+        });
     }
 
     private void loadDataKost() {
@@ -181,8 +203,9 @@ public class DashboardPresenter {
                                 scene.getStylesheets().add(cssFile);
 
                                 DashboardEditKostComponent editKostModal = loader.getController();
+
                                 editKostModal.setKost_id(kost_id);
-                                editKostModal.setTextField(kost.getAlamat(), kost.getFasilitas(), kost.getHarga(), kost.getTotal_kamar());
+                                editKostModal.setAllData(kost);
 
                                 dialogStage.setScene(scene);
                                 dialogStage.showAndWait();

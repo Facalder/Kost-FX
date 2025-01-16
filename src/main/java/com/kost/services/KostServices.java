@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
+import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +19,6 @@ import java.util.List;
 
 public class KostServices implements IKostServices {
     private final IAkunServices akunServices = new AkunServices();
-
     private ResultSet result;
 
     @Override
@@ -51,7 +51,7 @@ public class KostServices implements IKostServices {
                         stmtInsert.setDouble(5, kost.getHarga());
                         stmtInsert.setInt(6, kost.getTotal_kamar());
                         stmtInsert.setInt(7, kost.getKamar_tersedia());
-                        stmtInsert.setString(8, "");
+                        stmtInsert.setBlob(8, kost.getFoto());
 
                         int rowsAffected = stmtInsert.executeUpdate();
 
@@ -92,7 +92,7 @@ public class KostServices implements IKostServices {
     public void updateKost(Kost kost, int kost_id) {
         String queryOwner = "SELECT id FROM akun WHERE nama_pengguna = ?";
         String queryCheck = "SELECT id FROM kost WHERE kost_id = ? AND id = ?";
-        String queryUpdate = "UPDATE kost SET alamat = ?, fasilitas = ?, harga = ?, total_kamar = ? WHERE kost_id = ?";
+        String queryUpdate = "UPDATE kost SET alamat = ?, fasilitas = ?, harga = ?, total_kamar = ?, foto = ? WHERE kost_id = ?";
 
         try (var con = DBConnection.connect()) {
             if (con != null) {
@@ -116,7 +116,12 @@ public class KostServices implements IKostServices {
                         stmtUpdate.setString(2, kost.getFasilitas());
                         stmtUpdate.setDouble(3, kost.getHarga());
                         stmtUpdate.setInt(4, kost.getTotal_kamar());
-                        stmtUpdate.setInt(5, kost_id);
+                        if (kost.getFoto() != null) {
+                            stmtUpdate.setBlob(5, kost.getFoto());
+                        } else {
+                            stmtUpdate.setNull(5, java.sql.Types.BLOB);
+                        }
+                        stmtUpdate.setInt(6, kost_id);
                         int rowsAffected = stmtUpdate.executeUpdate();
 
                         if (rowsAffected > 0) {
@@ -262,10 +267,11 @@ public class KostServices implements IKostServices {
                             int kost_id = kostResult.getInt("kost_id");
                             int total_kamar = kostResult.getInt("total_kamar");
                             int kamar_tersedia = kostResult.getInt("kamar_tersedia");
+                            Blob foto = kostResult.getBlob("foto");
 
                             System.out.println(kost_id);
 
-                            Kost kost = new Kost(id, nama_pengguna, alamat, fasilitas, harga, promoPercentage, promoExpiry, kost_id, total_kamar, kamar_tersedia, "");
+                            Kost kost = new Kost(id, nama_pengguna, alamat, fasilitas, harga, promoPercentage, promoExpiry, kost_id, total_kamar, kamar_tersedia, foto);
                             kostList.add(kost);
                         }
                     }
